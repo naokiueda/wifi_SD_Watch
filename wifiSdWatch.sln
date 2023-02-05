@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wifiSdWatch", "wifiSdWatch\wifiSdWatch.csproj", "{2A649C33-E8A4-42DA-98E6-47CB5BDC39E0}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "wifi SD Watch Setup", "wifi SD Watch Setup\wifi SD Watch Setup.vdproj", "{8409E0B3-1008-4AC6-8678-D87EA38BD1BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A649C33-E8A4-42DA-98E6-47CB5BDC39E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A649C33-E8A4-42DA-98E6-47CB5BDC39E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A649C33-E8A4-42DA-98E6-47CB5BDC39E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A649C33-E8A4-42DA-98E6-47CB5BDC39E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8409E0B3-1008-4AC6-8678-D87EA38BD1BF}.Debug|Any CPU.ActiveCfg = Debug
+		{8409E0B3-1008-4AC6-8678-D87EA38BD1BF}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FD9D983-10AD-4F4D-B5C9-86E9DB6F1165}
+	EndGlobalSection
+EndGlobal
