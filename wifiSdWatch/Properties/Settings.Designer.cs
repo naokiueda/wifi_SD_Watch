@@ -34,5 +34,17 @@ namespace wifiSdWatch.Properties {
                 this["lastDownloadFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int lastWifiType {
+            get {
+                return ((int)(this["lastWifiType"]));
+            }
+            set {
+                this["lastWifiType"] = value;
+            }
+        }
     }
 }

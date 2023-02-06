@@ -51,6 +51,7 @@ namespace wifiSdWatch
             this.Text = Version.getVerionText();
             label_downloadedFileInfo.Text = "";
             textBoxDownloadFolder.Text = Properties.Settings.Default.lastDownloadFolder;
+            comboBoxWifiType.SelectedIndex = Properties.Settings.Default.lastWifiType;
             pictureBoxWifiNG.Visible = false;
         }
 
@@ -71,22 +72,33 @@ namespace wifiSdWatch
                     return;
                 }
 
-                DialogResult dr = MessageBox.Show("DELETE ALL files in download folder?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (dr == DialogResult.Cancel)
+                //If download folder is not empty, ask to delete
+                if (new DirectoryInfo(downLoadFolder).GetFiles().Length > 0)
                 {
-                    return;
-                }
-                else if (dr == DialogResult.Yes)
-                {
-                    //Delete All files in download file
-                    foreach (FileInfo file in new DirectoryInfo(downLoadFolder).GetFiles())
+                    DialogResult dr = MessageBox.Show("DELETE ALL files in download folder?", "Confirm", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (dr == DialogResult.Cancel)
                     {
-                        file.Delete();
+                        return;
+                    }
+                    else if (dr == DialogResult.Yes)
+                    {
+                        //Delete All files in download file
+                        foreach (FileInfo file in new DirectoryInfo(downLoadFolder).GetFiles())
+                        {
+                            file.Delete();
+                        }
                     }
                 }
 
-                MessageBox.Show("Restart Livestack", "Pause", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                wifiSD = new ezShare();
+                MessageBox.Show("Start/Restart Livestack, then press OK", "Pause", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (comboBoxWifiType.Text == "ezSh@re")
+                {
+                    wifiSD = new ezShare();
+                }
+                else if(comboBoxWifiType.Text == "FlashAir")
+                {
+                    wifiSD = new FlashAir();
+                }
                 wifiSD.startDownloadService(downLoadFolder, this);
                 isDownloadRunning = true;
                 Task.Run(() => netWorkErrorWatchLoop());
@@ -112,23 +124,7 @@ namespace wifiSdWatch
         /// <param name="e"></param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string copyStr = "";
-            copyStr += " wifi SD Watch V1.0\n";
-            copyStr += " \n";
-            copyStr += " Copyright (c) 2023 Naoki Ueda, stellartech.science\n";
-            copyStr += " \n";
-            copyStr += " https://stellartech.science/wifi-SD-Watch\n";
-            copyStr += " \n";
-            copyStr += " Released under the MIT license.\n";
-            copyStr += " see https://opensource.org/licenses/MIT\n";
-            copyStr += " \n";
-            copyStr += " With 'AngleSharp' \n";
-            copyStr += " https://anglesharp.github.io/\n";
-            copyStr += "\n";
-
-            MessageBox.Show(copyStr, "Copyright-Under MIT license ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
+            MessageBox.Show(Version.getCopyrightText(), "Copyright-Under MIT license ", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         #endregion
 
@@ -158,6 +154,19 @@ namespace wifiSdWatch
         }
 
         /// <summary>
+        /// Utility: Open download folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void panelFolderOpen_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(textBoxDownloadFolder.Text))
+            {
+                System.Diagnostics.Process.Start(textBoxDownloadFolder.Text);
+            }
+        }
+
+        /// <summary>
         /// Save setting
         /// </summary>
         /// <param name="sender"></param>
@@ -170,6 +179,12 @@ namespace wifiSdWatch
                 Properties.Settings.Default.Save();
             }
         }
+        private void comboBoxWifiType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.lastWifiType = comboBoxWifiType.SelectedIndex;
+            Properties.Settings.Default.Save();
+        }
+
 
         /// <summary>
         /// Exit from menu
@@ -178,7 +193,7 @@ namespace wifiSdWatch
         /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            wifiSD.stopDownloadService(); if (wifiSD != null)
+            if (wifiSD != null)
             {
                 wifiSD.stopDownloadService();
             }
@@ -244,5 +259,6 @@ namespace wifiSdWatch
         {
             pictureBoxWifiNG.Visible = visible;
         }
+
     }
 }

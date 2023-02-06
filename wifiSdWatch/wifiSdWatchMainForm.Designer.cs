@@ -44,16 +44,22 @@ namespace wifiSdWatch
             this.textBoxDownloadFolder = new System.Windows.Forms.TextBox();
             this.buttonFolderDlg = new System.Windows.Forms.Button();
             this.pictureBoxWifiNG = new System.Windows.Forms.PictureBox();
+            this.comboBoxWifiType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panelFolderOpen = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_moving_0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStill_0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWifi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWifiNG)).BeginInit();
+            this.panelFolderOpen.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonDownload
             // 
+            this.buttonDownload.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonDownload.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.buttonDownload.Location = new System.Drawing.Point(239, 245);
             this.buttonDownload.Name = "buttonDownload";
@@ -105,9 +111,9 @@ namespace wifiSdWatch
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(371, 146);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(216, 27);
+            this.label6.Size = new System.Drawing.Size(191, 27);
             this.label6.TabIndex = 26;
-            this.label6.Text = "Download Folder";
+            this.label6.Text = "Folder Monitor";
             // 
             // pictureBox_moving_0
             // 
@@ -132,7 +138,7 @@ namespace wifiSdWatch
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Default;
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
             this.pictureBox5.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox5.InitialImage")));
             this.pictureBox5.Location = new System.Drawing.Point(339, 71);
@@ -175,6 +181,7 @@ namespace wifiSdWatch
             // 
             // buttonFolderDlg
             // 
+            this.buttonFolderDlg.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonFolderDlg.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.buttonFolderDlg.Location = new System.Drawing.Point(580, 249);
             this.buttonFolderDlg.Name = "buttonFolderDlg";
@@ -196,12 +203,69 @@ namespace wifiSdWatch
             this.pictureBoxWifiNG.TabStop = false;
             this.pictureBoxWifiNG.Visible = false;
             // 
+            // comboBoxWifiType
+            // 
+            this.comboBoxWifiType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(47)))), ((int)(((byte)(85)))), ((int)(((byte)(151)))));
+            this.comboBoxWifiType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxWifiType.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.comboBoxWifiType.ForeColor = System.Drawing.Color.White;
+            this.comboBoxWifiType.FormattingEnabled = true;
+            this.comboBoxWifiType.Items.AddRange(new object[] {
+            "ezSh@re",
+            "FlashAir"});
+            this.comboBoxWifiType.Location = new System.Drawing.Point(88, 261);
+            this.comboBoxWifiType.Name = "comboBoxWifiType";
+            this.comboBoxWifiType.Size = new System.Drawing.Size(90, 24);
+            this.comboBoxWifiType.TabIndex = 37;
+            this.comboBoxWifiType.Text = "ezSh@re";
+            this.comboBoxWifiType.SelectedIndexChanged += new System.EventHandler(this.comboBoxWifiType_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(206)))), ((int)(((byte)(68)))));
+            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(371, 173);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(195, 27);
+            this.label1.TabIndex = 38;
+            this.label1.Text = "Virtual Camera";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(160)))), ((int)(((byte)(0)))));
+            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(10, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 16);
+            this.label2.TabIndex = 39;
+            this.label2.Text = " Open ";
+            this.label2.Click += new System.EventHandler(this.panelFolderOpen_Click);
+            // 
+            // panelFolderOpen
+            // 
+            this.panelFolderOpen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(160)))), ((int)(((byte)(0)))));
+            this.panelFolderOpen.Controls.Add(this.label2);
+            this.panelFolderOpen.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panelFolderOpen.Location = new System.Drawing.Point(354, 74);
+            this.panelFolderOpen.Name = "panelFolderOpen";
+            this.panelFolderOpen.Size = new System.Drawing.Size(81, 40);
+            this.panelFolderOpen.TabIndex = 40;
+            this.panelFolderOpen.Click += new System.EventHandler(this.panelFolderOpen_Click);
+            // 
             // wifiSdWatchMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(661, 340);
+            this.Controls.Add(this.panelFolderOpen);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.comboBoxWifiType);
             this.Controls.Add(this.pictureBoxWifiNG);
             this.Controls.Add(this.buttonFolderDlg);
             this.Controls.Add(this.textBoxDownloadFolder);
@@ -227,6 +291,8 @@ namespace wifiSdWatch
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWifi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWifiNG)).EndInit();
+            this.panelFolderOpen.ResumeLayout(false);
+            this.panelFolderOpen.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,6 +313,10 @@ namespace wifiSdWatch
         private System.Windows.Forms.Button buttonFolderDlg;
         private System.Windows.Forms.PictureBox pictureBoxWifiNG;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ComboBox comboBoxWifiType;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panelFolderOpen;
     }
 }
 
