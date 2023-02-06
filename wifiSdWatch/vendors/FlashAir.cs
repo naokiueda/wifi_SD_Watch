@@ -65,7 +65,8 @@ namespace wifiSdWatch
                         {
                             string fname = item.Trim().Split(':')[1].Replace("\"", "");
                             string fnameWE = Path.GetFileNameWithoutExtension(fname);
-                            if (fnameWE.Length == 8)//Only valid digital folder name length
+                            string extention = Path.GetExtension(fname).Replace(".", "").ToUpper();
+                            if (fnameWE.Length == 8 && (extention=="JPG" || extention=="JPEG"))//Only valid digital folder name length, and jpeg file
                             {
                                 int fileSerial = 0;
                                 if (int.TryParse(fnameWE.Substring(fnameWE.Length - 4, 4), out fileSerial))
