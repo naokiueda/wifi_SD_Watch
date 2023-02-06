@@ -49,7 +49,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>stellartechScience.pfx</AssemblyOriginatorKeyFile>
@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="aTagOnlyHtmlParser.cs" />
+    <Compile Include="vendors\FlashAir.cs" />
     <Compile Include="vendors\ezShare.cs" />
     <Compile Include="Version.cs" />
     <Compile Include="wifiSdWatchMainForm.cs">
@@ -125,7 +126,6 @@
     <Content Include="image\wifiSdWatch.ico" />
     <Content Include="image\WifiSD_NG.png" />
     <Content Include="wifiSdWatch.ico" />
-    <Content Include="wifiSdWatchIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

@@ -29,10 +29,14 @@ namespace wifiSdWatch
         public override bool downloadLatestFile()
         {
             //Find Latest Folder in "DCIM" folder
-            string latestFolder = DATAROOT + "%5C" + getLatestFolder(getHTML(DATAROOT));
+            string latestFolder = getLatestFolder(getHTML(DATAROOT));
+            string latestFolderPath = DATAROOT + "%5C" + latestFolder;
+            int folderSerial = 0;
+
+            int.TryParse(latestFolder.Substring(0, 3), out folderSerial);
 
             //Find Latest file in the latest folder
-            string htmlSource = getHTML(latestFolder);
+            string htmlSource = getHTML(latestFolderPath);
             if (htmlSource == null)
             {
                 return false;
@@ -57,18 +61,21 @@ namespace wifiSdWatch
             foreach (aTagOnlyHtmlParser.aTag el in aTagOnlyHtmlParser.parseAtagOnly(htmlSource))
             {
                 string fname = el.innerHtml.Trim();
-                string uri = el.href;
-                if (uri.Contains("download") && uri.Contains("http") && fname.ToUpper().EndsWith(".JPG"))
+                if (Path.GetFileNameWithoutExtension(fname).Length == 8) //Only valid digital camera image file name length
                 {
-                    int fileSerial = 0;
-                    string fnameWE = Path.GetFileNameWithoutExtension(fname);
-                    if (int.TryParse(fnameWE.Substring(fnameWE.Length - 4, 4), out fileSerial))
+                    string uri = el.href;
+                    if (uri.Contains("download") && uri.Contains("http") && fname.ToUpper().EndsWith(".JPG"))
                     {
-                        if (fileSerial > fileSerialMax)
+                        int fileSerial = 0;
+                        string fnameWE = Path.GetFileNameWithoutExtension(fname);
+                        if (int.TryParse(fnameWE.Substring(fnameWE.Length - 4, 4), out fileSerial))
                         {
-                            fileSerialMax = fileSerial;
-                            fileNameMax = fname;
-                            uriMax = uri;
+                            if (fileSerial > fileSerialMax)
+                            {
+                                fileSerialMax = fileSerial;
+                                fileNameMax = fname;
+                                uriMax = uri;
+                            }
                         }
                     }
                 }
@@ -84,6 +91,8 @@ namespace wifiSdWatch
                         WebClient webClient = new WebClient();
                         webClient.DownloadFile(uriMax, localTarget);
                         hasNetworkError = false;
+                        
+                        lastAquireSn = folderSerial * 1000 + fileSerialMax;
                         parent.updateDownloadedFileInfo(localTarget);
                     }
                 }
@@ -105,7 +114,7 @@ namespace wifiSdWatch
         private string getLatestFolder(string htmlstr)
         {
             string ret = "";
-            if (htmlstr == "")
+            if (htmlstr == "" || htmlstr == null)
             {
                 return ret;
             }
@@ -132,7 +141,7 @@ namespace wifiSdWatch
             foreach (aTagOnlyHtmlParser.aTag el in aTagOnlyHtmlParser.parseAtagOnly(htmlstr))
             {
                 string folder = el.innerHtml.Trim();
-                if (folder.Length == 8)
+                if (folder.Length == 8)//Only valid digital folder name length
                 {
                     int folderSerial = 0;
                     if (int.TryParse(folder.Substring(0, 3), out folderSerial))

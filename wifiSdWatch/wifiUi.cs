@@ -30,6 +30,7 @@ namespace wifiSdWatch
         private bool isDownloadRunning;
         protected string downloadFolder;
         public bool hasNetworkError;
+        protected int lastAquireSn;//folderSN*1000+fileSN
 
         /// <summary>
         /// Constructor

@@ -3,10 +3,14 @@
 namespace wifiSdWatch
 {
     /// <summary>
-    /// simplified HTML parser, that only aquire <A href> tag, and only get "href" and "innerHTML"
+    /// Simplified HTML parser, that only aquire <A href> tag, and only get "href" and "innerHTML"
+    /// It is similar functionality as "document.getElementsByTagName('a')" in javascript
     /// </summary>
     public class aTagOnlyHtmlParser
     {
+        /// <summary>
+        /// represents A-tag, with href attribute and innerHTML only.
+        /// </summary>
         public class aTag
         {
             public string href;
@@ -27,7 +31,11 @@ namespace wifiSdWatch
                 innerHtml = aTagHtml;
             }
         }
-
+        /// <summary>
+        /// Get all A-tags in html text
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
         public static List<aTag> parseAtagOnly(string html)
         {
             int pos = 0;
@@ -45,10 +53,7 @@ namespace wifiSdWatch
                     string tag = work.Substring(0, pos2 + pos2Target.Length);
 
                     aTag at = new aTag(tag);
-                    if (at.innerHtml.Trim().Length > 4)
-                    {
-                        aTags.Add(at);
-                    }
+                    aTags.Add(at);
                     work = work.Substring(pos2);
                 }
             }
