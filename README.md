@@ -11,4 +11,6 @@ This small application does following
 
 
 
-The installer file "wifiSdWatch Setup.msi" is not cirtified-signed and will show security message when install.
+The binnary installer file is here. 
+https://stellartech.science/sc/wifi-sd-watch/wifi-SD-Watch-Installer.zip
+Note: this file does NOT "cirtified code signing" and will show security message when install.
